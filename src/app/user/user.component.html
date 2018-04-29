@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="col-md-12">
+
+    <h5>Display {{users.length}} Users</h5>
+    <br>
+  </div>
+  <div class="col-md-12">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Add</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+          <!-- <th scope="col">Handle</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <a routerLink="/Users/Create">
+              <button type="button" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+            </a>
+          </td>
+          <td>
+            <a [routerLink]="['/Users', user.id]">
+              <button type="button" class="btn btn-info">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+            </a>
+          </td>
+          <td>
+            <a (click)="deleteUser(user)">
+              <button type="button" class="btn btn-danger">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </a>
+          </td>
+
+        </tr>
+
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
