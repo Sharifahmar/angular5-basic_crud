@@ -16,6 +16,7 @@ export class FormComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userService: UserServiceService, private router: Router) { }
   title: string;
   form: FormGroup;
+  private id;
   address: FormGroup;
   ngOnInit() {
 
@@ -49,7 +50,7 @@ export class FormComponent implements OnInit {
 
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
-
+      this.id = id;
       this.title = id ? 'Edit User' : 'New User';
 
       if (!id)
@@ -58,13 +59,13 @@ export class FormComponent implements OnInit {
       this.userService.getUsersById(id)
         .subscribe(
           user => {
-          this.user = user,
-            //console.log(user)
-            response => {
-              // if (response.status == 404) {
-              //   this.router.navigate(['NotFound']);
-              // }
-            }
+            this.user = user,
+              //console.log(user)
+              response => {
+                // if (response.status == 404) {
+                //   this.router.navigate(['NotFound']);
+                // }
+              }
           }
         );
     });
@@ -82,10 +83,10 @@ export class FormComponent implements OnInit {
   get zipcode() { return this.form.get('address').get('zipcode'); }
 
   save() {
-    var result; 
+    var result;
     var userValue = this.form.value;
 
-    if (userValue.id) {
+    if (this.id) {
       result = this.userService.updateUser(userValue);
     } else {
       result = this.userService.addUser(userValue);
