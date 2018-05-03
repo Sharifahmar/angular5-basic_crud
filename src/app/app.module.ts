@@ -13,7 +13,9 @@ import { HomeRoutingModule }  from '../app/home/home-routing.module';
 import { FormComponent } from './form/form.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { LoginGuard } from '../app/guards/login-guards';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login-service';
 
 
 
@@ -25,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UserComponent,
     HomeComponent,
     FormComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
   
   ],
-  providers: [UserServiceService],
+  providers: [UserServiceService,LoginGuard,LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
