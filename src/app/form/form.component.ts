@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
+  errorMessage: string;
   user: User = new User();
   constructor(private route: ActivatedRoute, private userService: UserServiceService, private router: Router) { }
   title: string;
@@ -66,6 +66,9 @@ export class FormComponent implements OnInit {
                 //   this.router.navigate(['NotFound']);
                 // }
               }
+          },
+          error => {
+            this.errorMessage = error
           }
         );
     });
@@ -92,6 +95,8 @@ export class FormComponent implements OnInit {
       result = this.userService.addUser(userValue);
     }
 
-    result.subscribe(data => this.router.navigate(['Users']));
+    result.subscribe(data => this.router.navigate(['Users']),
+      error => { this.errorMessage = error }
+    );
   }
 }

@@ -9,16 +9,16 @@ import { UserServiceService } from "../../app/user/user-service.service";
 })
 export class UserComponent implements OnInit {
 
-  private users: User[];
+  public users: User[];
+  errorMessage: string;
 
   constructor(private userService: UserServiceService) { }
 
   ngOnInit() {
 
-    this.userService.getUsers().subscribe(data => {
-      this.users = data;
-
-    });
+    this.userService.getUsers().subscribe(data => { this.users = data },
+      error => { this.errorMessage = error }
+    );
 
   }
   deleteUser(user) {
@@ -27,10 +27,11 @@ export class UserComponent implements OnInit {
       this.users.splice(index, 1);
 
       this.userService.deleteUser(user.id)
-        .subscribe(data => { console.log(data)},
-          err => {
-           // alert("Could not delete user.");
+        .subscribe(data => { console.log(data) },
+          error => {
+            // alert("Could not delete user.");
             // Revert the view back to its original state
+            this.errorMessage = error
             this.users.splice(index, 0, user);
           });
     }

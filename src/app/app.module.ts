@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginGuard } from '../app/guards/login-guards';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login-service';
+import { MessageService } from "../app/message.service";
 
 
 
@@ -45,7 +46,7 @@ import { LoginService } from './login/login-service';
 
   
   ],
-  providers: [UserServiceService,LoginGuard,LoginService],
+  providers: [UserServiceService,LoginGuard,LoginService,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
